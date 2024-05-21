@@ -11,6 +11,7 @@ import router from '@adonisjs/core/services/router'
 import ReceitasController from '../app/controllers/receitas_controller.js'
 import CategoriasController from '../app/controllers/categorias_controller.js'
 import IngredientesController from '../app/controllers/ingredientes_controller.js'
+import ReceitaIngredientesController from '#controllers/receita_ingredientes_controller'
 
 router.get('/', async () => {
   return {
@@ -21,3 +22,5 @@ router.get('/', async () => {
 router.resource('/categoria', CategoriasController).apiOnly()
 router.resource('/receita', ReceitasController).apiOnly()
 router.resource('/ingrediente', IngredientesController).apiOnly()
+router.resource('/receitaingrediente', ReceitaIngredientesController).apiOnly()
+

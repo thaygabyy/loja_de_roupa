@@ -6,6 +6,18 @@ export default class ReceitaIngrediente extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
+  @column()
+  declare nome: string
+
+  @column()
+  declare quantidade: number
+  
+  @column()
+  declare unidade_medida: number
+  
+  
+  
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
