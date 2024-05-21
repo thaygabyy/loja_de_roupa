@@ -36,6 +36,6 @@ export default class CategoriasController {
         const categoria = await Categoria.findOrFail(params.id)
         
         await categoria.delete()
-        return {msg: 'Registro deletado com sucesso', categoria}
+        return {msg: 'Registro deletado com sucesso .', categoria}
     }
 }
