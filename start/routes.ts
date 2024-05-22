@@ -12,6 +12,7 @@ import ReceitasController from '../app/controllers/receitas_controller.js'
 import CategoriasController from '../app/controllers/categorias_controller.js'
 import IngredientesController from '../app/controllers/ingredientes_controller.js'
 import ReceitaIngredientesController from '#controllers/receita_ingredientes_controller'
+import UsuariosController from '../app/controllers/usuarios_controller.js'
 
 router.get('/', async () => {
   return {
@@ -23,4 +24,5 @@ router.resource('/categoria', CategoriasController).apiOnly()
 router.resource('/receita', ReceitasController).apiOnly()
 router.resource('/ingrediente', IngredientesController).apiOnly()
 router.resource('/receitaingrediente', ReceitaIngredientesController).apiOnly()
+router.resource('/usuario', UsuariosController).apiOnly()
 
