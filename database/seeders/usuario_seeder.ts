@@ -1,9 +1,9 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import Usuario from '../../app/models/usuario'
+import Usuario from '../../app/models/usuario.js'
 
 export default class extends BaseSeeder {
-  async run() {
-    return await Usuario.createmany([
+    async run() {
+    return await Usuario.createMany([
       { nome: 'Alice Silva', email: 'alice.silva@example.com', senha: 'senha123' },
       { nome: 'Bruno Oliveira', email: 'bruno.oliveira@example.com', senha: 'senha123' },
       { nome: 'Carla Souza', email: 'carla.souza@example.com', senha: 'senha123' },
