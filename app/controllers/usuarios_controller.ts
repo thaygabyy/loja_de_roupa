@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
+
 import Usuario from '../models/usuario.js'
 
 export default class UsuariosController  {
@@ -11,6 +12,7 @@ export default class UsuariosController  {
         const page = request.input('page', 1)
         const perPage = request.input('perPage', 10)
 
+        
         return await Usuario.query().paginate(page, perPage)
     }
 
