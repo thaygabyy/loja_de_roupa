@@ -24,5 +24,5 @@ router.resource('/categoria', CategoriasController).apiOnly()
 router.resource('/receita', ReceitasController).apiOnly()
 router.resource('/ingrediente', IngredientesController).apiOnly()
 router.resource('/receitaingrediente', ReceitaIngredientesController).apiOnly()
-router.resource('/usuario', UsuariosController).apiOnly()
+router.resource('/usuarios', UsuariosController).apiOnly()
 

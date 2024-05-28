@@ -1,50 +1,41 @@
- import type { HttpContext } from '@adonisjs/core/http'
+import type { HttpContext } from '@adonisjs/core/http'
 
-import Usuario from "../models/usuario"
+import Usuario from '../models/usuario.js'
 
-export default class UsuariosController {
-    async index({request}: HttpContext) {
+export default class UsuariosController  {
 
-        //http://localhost:3333/produtos?page=1&perPage=5
-    
-        const page = request.input('page',1 )
-        const perPage = request.input('perPage',10 )
+    async index({request}: HttpContext){
 
-        return await Usuario.query().preload('tipo').preload('ingredientes').paginate(page, perPage)
+        // http://localhost:3333/receitas?page=1&perPage=5
+
+        const page = request.input('page', 1)
+        const perPage = request.input('perPage', 10)
+
+        return await Usuario.query().paginate(page, perPage)
     }
 
-    async show({ params }: HttpContext) {
-
-       // return await Produto.findOrFail(params.id)
-        return await Usuario.query().where('id',params.id).preload('tipo').preload('ingredientes').first()
+    async show({params}: HttpContext){
+        return await Usuario.findOrFail(params.id)
     }
 
-    async store({ request }: HttpContext) {
-        const dados = request.only(['nome', 'preco', 'tamanho', 'tipoId'])
-
-
+    async store({request}: HttpContext){
+        const dados = request.only(['nome', 'email', 'senha'])
         return await Usuario.create(dados)
     }
 
-    async update({ params,request }: HttpContext) {
-        const Usuarios = await  Usuario.findOrFail(params.id)
-        const dados = request.only(['nome', 'email', 'senha',])
+    async update({params, request}: HttpContext){
 
-        Usuarios.merge(dados) 
-        return await Usuarios.save()
+        const receita = await Usuario.findOrFail(params.id)
+        const dados = request.only(['nome', 'email', 'senha'])
 
+        receita.merge(dados)
+        return await receita.save()
     }
 
-    async destroy({ params }: HttpContext) {
-        const Usuario = await  Usuario.findOrFail(params.id)
-
-        await Usuario.delete()
-        return {msg: 'registro deletado com sucesso',Usuario}
-
-        // try {
-        //     return {msg: 'registro deletado com sucesso',produto}
-        // } catch (error) {
-        //     return {msg :error}
-        // }
+    async destroy({params}: HttpContext){
+        const receita = await Usuario.findOrFail(params.id)
+        
+        await receita.delete()
+        return {msg: 'Registro deletado com sucesso', receita}
     }
 }
