@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import Categoria from '../models/categoria.js'
+import { CategoriaValidator } from '#validators/categoria'
 
 export default class CategoriasController {
 
@@ -19,14 +20,14 @@ export default class CategoriasController {
     }
 
     async store({request}: HttpContext){
-        const dados = request.only(['nome'])
+        const dados = await request.validate({ schema: CategoriaValidator })
         return await Categoria.create(dados)
     }
 
     async update({params, request}: HttpContext){
 
         const categoria = await Categoria.findOrFail(params.id)
-        const dados = request.only(['nome'])
+        const dados = await request.validate({ schema: CategoriaValidator })
 
         categoria.merge(dados)
         return await categoria.save()

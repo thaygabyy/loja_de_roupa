@@ -1,15 +1,13 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import ReceitaIngrediente from '#models/receita_ingrediente'
+import { ReceitaIngredienteValidator } from '#validators/receita_ingrediente'
 
 export default class ReceitaIngredientesController {
     async index({request}: HttpContext){
-
         // http://localhost:3333/receitaingredientes?page=1&perPage=5
-
         const page = request.input('page', 1)
         const perPage = request.input('perPage', 10)
-
         return await ReceitaIngrediente.query().paginate(page, perPage)
     }
 
@@ -18,14 +16,13 @@ export default class ReceitaIngredientesController {
     }
 
     async store({request}: HttpContext){
-        const dados = request.only(['nome', 'quantidade', 'unidade_medida'])
+        const dados = await request.validate({ schema: ReceitaIngredienteValidator })
         return await ReceitaIngrediente.create(dados)
     }
 
     async update({params, request}: HttpContext){
-
         const receitaingrediente = await ReceitaIngrediente.findOrFail(params.id)
-        const dados = request.only(['nome', 'quantidade', 'unidade_medida'])
+        const dados =await request.validate({ schema: ReceitaIngredienteValidator })
 
         receitaingrediente.merge(dados)
         return await receitaingrediente.save()

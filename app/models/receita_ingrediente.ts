@@ -14,6 +14,12 @@ export default class ReceitaIngrediente extends BaseModel {
   
   @column()
   declare unidade_medida: number
+
+  @column()
+  declare receita_id: number
+  
+  @column()
+  declare ingrediente_id: number
   
   
   
@@ -24,3 +30,4 @@ export default class ReceitaIngrediente extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 }
+

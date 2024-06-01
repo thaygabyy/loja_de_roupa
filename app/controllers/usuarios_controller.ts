@@ -1,43 +1,47 @@
 import type { HttpContext } from '@adonisjs/core/http'
-
-
 import Usuario from '../models/usuario.js'
+import { UsuarioValidator } from '#validators/usuario'
 
-export default class UsuariosController  {
+export default class UsuariosController {
 
-    async index({request}: HttpContext){
+  async index({ request }: HttpContext) {
+    const page = request.input('page', 1)
+    const perPage = request.input('perPage', 10)
+    return await Usuario.query().paginate(page, perPage)
+  }
 
-        // http://localhost:3333/receitas?page=1&perPage=5
+  async show({ params }: HttpContext) {
+    return await Usuario.findOrFail(params.id)
+  }
 
-        const page = request.input('page', 1)
-        const perPage = request.input('perPage', 10)
-
-        
-        return await Usuario.query().paginate(page, perPage)
+  async store({ request, response }: HttpContext) {
+    try {
+      const dados = await request.validate({ schema: UsuarioValidator })
+      const usuario = await Usuario.create(dados)
+      return usuario
+    } catch (error) {
+      if (error.code === '23505') { 
+        return response.status(400).send({ message: 'Este email já está em uso.' })
+      }
+      return response.status(400).send({ message: error.messages })
     }
+  }
 
-    async show({params}: HttpContext){
-        return await Usuario.findOrFail(params.id)
+  async update({ params, request, response }: HttpContext) {
+    try {
+      const usuario = await Usuario.findOrFail(params.id)
+      const dados = await request.validate({ schema: UsuarioValidator })
+      usuario.merge(dados)
+      await usuario.save()
+      return usuario
+    } catch (error) {
+      return response.status(400).send({ message: error.messages })
     }
+  }
 
-    async store({request}: HttpContext){
-        const dados = request.only(['nome', 'email', 'senha'])
-        return await Usuario.create(dados)
-    }
-
-    async update({params, request}: HttpContext){
-
-        const receita = await Usuario.findOrFail(params.id)
-        const dados = request.only(['nome', 'email', 'senha'])
-
-        receita.merge(dados)
-        return await receita.save()
-    }
-
-    async destroy({params}: HttpContext){
-        const receita = await Usuario.findOrFail(params.id)
-        
-        await receita.delete()
-        return {msg: 'Registro deletado com sucesso', receita}
-    }
+  async destroy({ params }: HttpContext) {
+    const usuario = await Usuario.findOrFail(params.id)
+    await usuario.delete()
+    return { msg: 'Registro deletado com sucesso', usuario }
+  }
 }

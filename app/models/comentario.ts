@@ -6,7 +6,7 @@ export default class Comentario extends BaseModel {
   declare id: number
 
   @column()
-  declare nome: string
+  declare texto: string
   
   @column()
   declare data_comentario: string
@@ -15,7 +15,7 @@ export default class Comentario extends BaseModel {
   declare usuario_id: number
 
   @column()
-  declare id_receita: number
+  declare receita_id: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import Ingrediente from '../models/ingrediente.js'
+import { IngredienteValidator } from '#validators/ingrediente'
 
 export default class IngredientesController {
     async index({request}: HttpContext){
@@ -18,14 +19,14 @@ export default class IngredientesController {
     }
 
     async store({request}: HttpContext){
-        const dados = request.only(['nome', 'preco', 'tipo'])
+        const dados = await request.validate({ schema: IngredienteValidator })
         return await Ingrediente.create(dados)
     }
 
     async update({params, request}: HttpContext){
 
         const ingrediente = await Ingrediente.findOrFail(params.id)
-        const dados = request.only(['nome', 'preco', 'tipo'])
+        const dados = await request.validate({ schema: IngredienteValidator })
 
         ingrediente.merge(dados)
         return await ingrediente.save()
