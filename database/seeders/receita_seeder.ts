@@ -32,13 +32,13 @@ export default class extends BaseSeeder {
         num_porcoes: 12,
         categoria_id: 4,
       },
-      {
+     /* {
         nome: 'Brigadeiro',
         instrucoes: 'Cozinhe o leite condensado com chocolate até engrossar.',
         tempo_de_preparo: 20,
         num_porcoes: 10,
         categoria_id: 5,
-      },
+      },*/
     ])
   }
 }

@@ -14,6 +14,7 @@ import IngredientesController from '../app/controllers/ingredientes_controller.j
 import ReceitaIngredientesController from '#controllers/receita_ingredientes_controller'
 import UsuariosController from '../app/controllers/usuarios_controller.js'
 import ComentariosController from '#controllers/comentarios_controller'
+import AvaliacaosController from '#controllers/avaliacaos_controller'
 
 router.get('/', async () => {
   return {
@@ -27,4 +28,5 @@ router.resource('/ingrediente', IngredientesController).apiOnly()
 router.resource('/receitaingrediente', ReceitaIngredientesController).apiOnly()
 router.resource('/usuario', UsuariosController).apiOnly()
 router.resource('/comentario', ComentariosController).apiOnly()
+router.resource('/avaliacao', AvaliacaosController).apiOnly()
 
