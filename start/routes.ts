@@ -8,13 +8,13 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import ReceitasController from '../app/controllers/receitas_controller.js'
-import CategoriasController from '../app/controllers/categorias_controller.js'
-import IngredientesController from '../app/controllers/ingredientes_controller.js'
-import ReceitaIngredientesController from '#controllers/receita_ingredientes_controller'
-import UsuariosController from '../app/controllers/usuarios_controller.js'
-import ComentariosController from '#controllers/comentarios_controller'
-import AvaliacaosController from '#controllers/avaliacaos_controller'
+import ClienteController from '../app/controllers/clientes_controller.js'
+import CompraController from '../app/controllers/compras_controller.js'
+import FornecedorController from '../app/controllers/fornecedors_controller.js'
+import FuncionarioController from '#controllers/funcionarios_controller'
+import ItemController from '../app/controllers/items_controller.js'
+import PedidoController from '#controllers/pedidos_controller'
+import ProdutoController from '#controllers/produtos_controller'
 
 router.get('/', async () => {
   return {
@@ -22,11 +22,11 @@ router.get('/', async () => {
   }
 })
 
-router.resource('/categoria', CategoriasController).apiOnly()
-router.resource('/receita', ReceitasController).apiOnly()
-router.resource('/ingrediente', IngredientesController).apiOnly()
-router.resource('/receitaingrediente', ReceitaIngredientesController).apiOnly()
-router.resource('/usuario', UsuariosController).apiOnly()
-router.resource('/comentario', ComentariosController).apiOnly()
-router.resource('/avaliacao', AvaliacaosController).apiOnly()
+router.resource('/compra', CompraController).apiOnly()
+router.resource('/cliente', ClienteController).apiOnly()
+router.resource('/fornecedor', FornecedorController).apiOnly()
+router.resource('/funcionario', FuncionarioController).apiOnly()
+router.resource('/item', ItemController).apiOnly()
+router.resource('/pedido', PedidoController).apiOnly()
+router.resource('/produto', ProdutoController).apiOnly()
 
