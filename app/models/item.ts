@@ -1,21 +1,34 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo} from '@adonisjs/lucid/orm'
+import type {BelongsTo} from '@adonisjs/lucid/types/relations'
+import Pedido from '../models/pedido.js'
+import Produto from '../models/produto.js'
 
-export default class ItemDoPedido extends BaseModel {
+export default class Item extends BaseModel {
   @column({ isPrimary: true })
-  declare idItemDoPedido: number
+  declare id_item: number
 
   @column()
-  declare idPedido: number
+  declare id_pedido: number
 
   @column()
-  declare idProduto: number
+  declare id_produto: number
 
   @column()
   declare quantidade: number
 
   @column()
-  declare precoUnitario: number
+  declare preco_unitario: number
+
+  @belongsTo(() => Pedido, {
+    foreignKey: 'id_pedido',
+  })
+  declare pedidos: BelongsTo<typeof Pedido>
+
+  @belongsTo(() => Produto, {
+    foreignKey: 'id_produto',
+  })
+  declare produtos: BelongsTo<typeof Produto>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

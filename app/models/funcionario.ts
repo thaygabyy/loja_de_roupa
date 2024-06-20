@@ -1,9 +1,11 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type {HasMany} from '@adonisjs/lucid/types/relations'
+import Pedido from '../models/pedido.js'
 
 export default class Funcionario extends BaseModel {
   @column({ isPrimary: true })
-  declare idFuncionario: number
+  declare id_funcionario: number
 
   @column()
   declare nome: string
@@ -16,6 +18,11 @@ export default class Funcionario extends BaseModel {
 
   @column()
   declare email: string
+
+  @hasMany(() => Pedido, {
+    foreignKey: 'id_funcionario',
+  })
+  declare pedidos: HasMany<typeof Pedido>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -1,5 +1,5 @@
 {
-  "name": "pratos_e_aperitivos",
+  "name": "loja_de_roupa",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -57,7 +57,7 @@
     "@adonisjs/lucid": "^20.6.0",
     "@adonisjs/validator": "^13.0.2",
     "@vinejs/vine": "^2.0.0",
-    "better-sqlite3": "^10.0.0",
+    "better-sqlite3": "^10.1.0",
     "express": "^4.19.2",
     "luxon": "^3.4.4",
     "reflect-metadata": "^0.2.2"

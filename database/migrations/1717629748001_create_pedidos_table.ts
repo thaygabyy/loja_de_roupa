@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id_pedido').notNullable().unique()
-      table.timestamp('data_do_pedido', { useTz: true }).notNullable()
+      table.string('data_do_pedido', 8).notNullable()
       table.integer('id_cliente').unsigned().references('id_cliente').inTable('clientes').onDelete('CASCADE').notNullable()
       table.integer('id_funcionario').unsigned().references('id_funcionario').inTable('funcionarios').onDelete('CASCADE').notNullable()
 

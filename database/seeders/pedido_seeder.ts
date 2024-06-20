@@ -5,18 +5,18 @@ export default class extends BaseSeeder {
   async run() {
     await Pedido.createMany([
       {
-        dataDoPedido: '2024-01-01',
-        idCliente: 1, 
-        idFuncionario: 1 
+        data_do_pedido: '2024-01-01',
+        id_cliente: 1, 
+        id_funcionario: 1 
         },
       { 
-        dataDoPedido: '2024-02-01',
-        idCliente: 2,
-        idFuncionario: 2 
+        data_do_pedido: '2024-02-01',
+        id_cliente: 2,
+        id_funcionario: 2 
       },
-      { dataDoPedido: '2024-03-01',
-      idCliente: 3,
-      idFuncionario: 3 
+      { data_do_pedido: '2024-03-01',
+        id_cliente: 3,
+        id_funcionario: 3 
       },
     ])
   }

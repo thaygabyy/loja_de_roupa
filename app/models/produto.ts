@@ -1,12 +1,15 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type {HasMany} from '@adonisjs/lucid/types/relations'
+import Item from '../models/item.js'
+import Compra from '../models/compra.js'
 
 export default class Produto extends BaseModel {
   @column({ isPrimary: true })
-  declare idProduto: number
+  declare id_produto: number
 
   @column()
-  declare nomeProduto: string
+  declare nome_produto: string
 
   @column()
   declare tamanho: string
@@ -18,7 +21,16 @@ export default class Produto extends BaseModel {
   declare preco: number
 
   @column()
-  declare quantidadeEmEstoque: number
+  declare quantidade_em_estoque: number
+  @hasMany(() => Item, {
+    foreignKey: 'id_produto',
+  })
+  declare items: HasMany<typeof Item>
+
+  @hasMany(() => Compra, {
+    foreignKey: 'id_produto',
+  })
+  declare compras: HasMany<typeof Compra>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

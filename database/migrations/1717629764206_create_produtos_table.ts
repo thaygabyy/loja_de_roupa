@@ -1,23 +1,22 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
-export default class extends BaseSchema {
+export default class Produtos extends BaseSchema {
   protected tableName = 'produtos'
 
-  async up() {
+  public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_produto').notNullable().unique()
+      table.increments('id_produto').primary()
       table.string('nome_produto').notNullable()
-      table.string('tamanho').nullable()
-      table.string('cor').nullable()
-      table.decimal('preco', 12, 2).notNullable()
+      table.string('tamanho').notNullable()
+      table.string('cor').notNullable()
+      table.decimal('preco', 10, 2).notNullable()
       table.integer('quantidade_em_estoque').notNullable()
-
-      table.timestamp('created_at', { useTz: true }).notNullable()
+      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true }).nullable()
     })
   }
 
-  async down() {
+  public async down () {
     this.schema.dropTable(this.tableName)
   }
 }

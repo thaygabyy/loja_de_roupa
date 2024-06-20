@@ -1,23 +1,37 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo , column, manyToMany , hasMany} from '@adonisjs/lucid/orm'
-import type { BelongsTo, ManyToMany, HasMany} from '@adonisjs/lucid/types/relations'
-import Cliente from './cliente.js'
+import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import type {HasMany,BelongsTo } from '@adonisjs/lucid/types/relations'
+import Cliente from '../models/cliente.js'
+import Funcionario from '../models/funcionario.js'
+import Item from '../models/item.js'
 
 export default class Pedido extends BaseModel {
   @column({ isPrimary: true })
-  declare idPedido: number
+  declare id_pedido: number
 
   @column()
-  declare dataDoPedido: string
+  declare data_do_pedido: string
 
   @column()
-  declare idCliente: number
+  declare id_cliente: number
 
   @column()
-  declare idFuncionario: number
+  declare id_funcionario: number
 
-  @belongsTo(()=>Cliente)
-  declare tipo: BelongsTo<typeof Cliente>
+  @belongsTo(() => Cliente, {
+    foreignKey: 'id_cliente',
+  })
+  declare clientes: BelongsTo<typeof Cliente>
+
+  @belongsTo(() => Funcionario, {
+    foreignKey: 'id_funcionario',
+  })
+  declare funcionarios: BelongsTo<typeof Funcionario>
+
+  @hasMany(() => Item, {
+    foreignKey: 'id_pedido',
+  })
+  declare items: HasMany<typeof Item>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
